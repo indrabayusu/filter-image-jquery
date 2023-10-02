@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter Images by Category</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(203 213 225);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 85%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .heading {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-container button {
+      background-color: transparent;
+      border: 1px solid #aaa;
+      color: rgba(0, 0, 128, 0.8);
+      padding: 8px 16px;
+      margin: 0 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .filter-container button:hover {
+      background-color: navy;
+      color: #fff;
+    }
+
+    .filter-container button.active {
+      background-color: navy;
+      color: #fff;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center; 
+      max-width: 48%;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+    
+    #searchInput {
+      flex: 1;
+    }
+
+    .search-box input[type="text"] {
+      padding: 9px;
+      border: 1px solid rgb(0, 0, 128);
+    }
+
+    .search-box button, #backButton {
+      background-color: rgb(0, 0, 128);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .image {
+      margin: 10px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .image img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .image:hover {
+      transform: scale(1.05);
+    }
+
+    .image-label {
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 5px;
+    }
+    body.modal-active {
+      background-color: rgba(0, 0, 0, 0.5); 
+    }
+  </style>
+</head>
+<body>
+  <button id="backButton" onclick="window.location.href='../../../index.html#portfolio'" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded absolute left-3 top-3">
+      Back
+  </button>
+  
+  <div class="container">
+    <h1 class="heading">Filter Images by Category</h1>
+
+    <div class="filter-container">
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md active" data-filter="all">All</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="animal">Animal</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="nature">Nature</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="food">Food</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="drink">Drink</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="sports">Sports</button>
+      <button class="text-black transition duration-300 ease-in-out px-4 py-2 rounded-md" data-filter="technology">Technology</button>
+    </div>
+
+    <div class="search-box -mt-2 mb-4">
+      <input type="text" id="searchInput" placeholder="Search images by category" class="px-4 py-2 rounded-l-lg flex-1">
+      <button id="searchButton" class="bg-navy text-white px-4 py-2.5 rounded-r-lg hover:bg-blue-900">Search</button>
+    </div>
+
+    <div class="image-container">
+      <div class="image animal w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?cat" alt="Animal All">
+        <p class="image-description">Cats: Independent, furry pets known for agility, curiosity, and purring.</p>
+      </div>
+      <div class="image nature w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?beach" alt="Nature All">
+        <p class="image-description">Beach: Sandy shores, waves, relaxation, sunsets, seashells, and aquatic adventures.</p>
+      </div>
+      <div class="image drink w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?cappuccino" alt="Drink All">
+        <p class="image-description">Cappuccino: Rich espresso, frothy milk, bold flavor, aromatic, coffeehouse favorite.</p>
+      </div>
+      <div class="image technology w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?programming" alt="Technology All">
+        <p class="image-description">Web programming: Building interactive websites, coding for online user experiences.</p>
+      </div>
+      <div class="image sports w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?fitness" alt="Sports All">
+        <p class="image-description">Home workout: Exercising, staying active, and keeping healthy indoors.</p>
+      </div>
+      <div class="image technology w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?computer" alt="Technology All">
+        <p class="image-description">Computer: Electronic device processing data, performing tasks, enabling technology evolution.</p>
+      </div>
+      <div class="image sports w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?basketball" alt="Sports All">
+        <p class="image-description">Basketball hobby: Dribbling, shooting, teamwork, competition, passion, athleticism, skill development.</p>
+      </div>
+      <div class="image technology w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?robot" alt="Technology All">
+        <p class="image-description">Robots: Artificial intelligence, automation, mechanical, versatile, futuristic, labor-saving, precision, technology.</p>
+      </div>
+      <div class="image drink w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?milk" alt="Drink All">
+        <p class="image-description">Milk: Nutrient-rich, calcium source, dairy product, essential for growth and health.</p>
+      </div>
+      <div class="image animal w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?turtle" alt="Animal All">
+        <p class="image-description">Turtles: Reptilian, slow-moving, protective shell, aquatic or terrestrial, ancient creatures.</p>
+      </div>
+      <div class="image food w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?ramen" alt="Food All">
+        <p class="image-description">Ramen: Japanese noodle dish, flavorful broth, various toppings, satisfying comfort food.</p>
+      </div>
+      <div class="image nature w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?mountain" alt="Nature All">
+        <p class="image-description">Mountains: Majestic, towering peaks, breathtaking landscapes, diverse ecosystems, outdoor adventures await.</p>
+      </div>
+      <div class="image animal w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?tiger" alt="Animal All">
+        <p class="image-description">Tiger: Majestic big cat, orange coat, powerful predator in the wild.</p>
+      </div>
+      <div class="image food w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?hamburger" alt="Food All">
+        <p class="image-description">Hamburger: Delicious, grilled beef patty, often served in a bun.</p>
+      </div>
+      <div class="image nature w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?forest" alt="Nature All">
+        <p class="image-description">Forest: Lush, dense woodland teeming with diverse plant and animal life.</p>
+      </div>
+      <div class="image animal w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?eagle" alt="Animal All">
+        <p class="image-description">Eagle: Majestic bird of prey with sharp beak and powerful talons.</p>
+      </div>
+      <div class="image sports w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?badminton" alt="Sports All">
+        <p class="image-description">Badminton: Fast-paced racket sport played indoors with a feathered shuttlecock.</p>
+      </div>
+      <div class="image food w-64 h-36 overflow-hidden rounded-md transform transition-transform duration-300 hover:scale-110 animated animated-hover">
+        <img src="https://source.unsplash.com/300x200?donut" alt="Food All">
+        <p class="image-description">Donut: Sweet, fried dough pastry often topped with icing or sprinkles.</p>
+      </div>
+    </div>
+
+    <div id="imageModal" class="fixed inset-0 flex w-full h-full items-center justify-center z-50 hidden">
+      <div class="modal-content bg-white w-full max-w-3xl p-6 rounded-lg shadow-lg">
+        <img class="modal-img max-w-full h-96 mx-auto" id="modalImage" src="" alt="">
+        <p id="deskripsi" class="image-description text-center text-lg mt-4"></p>
+        
+        <!-- Tombol "Close" di tengah -->
+        <div class="text-center mt-4">
+          <button id="closeModal" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Close</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="imageNotFound" class="fixed inset-0 flex flex-col items-center justify-center z-50 hidden">
+      <div class="bg-white p-6 rounded-md shadow-lg text-center animate__animated animate__fadeIn">
+        <p class="text-lg text-red-500 mb-2">Oops! No Images Here.</p>
+        <p class="text-gray-500">Sorry, we couldn't find any images that match your search.</p>
+        <button id="closeNotification" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Close</button>
+      </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $(".filter-container button").click(function() {
+        var filterValue = $(this).attr('data-filter');
+        if (filterValue == 'all') {
+          $(".image").show('1000');
+        } else {
+          $(".image").not('.' + filterValue).hide('3000');
+          $(".image").filter('.' + filterValue).show('3000');
+        }
+        $(this).addClass('active').siblings().removeClass('active');
+      });
+    
+      $(".image").click(function() {
+        var imageUrl = $(this).find("img").attr("src");
+        var imageDescription = $(this).find(".image-description").text();
+        
+        $("#modalImage").attr("src", imageUrl);
+        $("#deskripsi").text(imageDescription);
+        
+        $("body").addClass("modal-active");
+        
+        $("#imageModal").removeClass("hidden").addClass("block");
+      });
+
+      $("#closeModal").click(function() {
+        $("#imageModal").removeClass("block").addClass("hidden");
+      
+        $("body").removeClass("modal-active");
+      });
+
+      $(window).click(function(event) {
+        if (event.target == document.getElementById("imageModal")) {
+          $("#imageModal").removeClass("block").addClass("hidden");
+        
+          $("body").removeClass("modal-active");
+        }
+      });
+
+      $("#searchButton").click(function() {
+        var searchTerm = $("#searchInput").val().toLowerCase();
+        var imagesFound = false; 
+
+        $(".image").each(function() {
+          var imageAlt = $(this).find("img").attr("alt").toLowerCase();
+          if (imageAlt.includes(searchTerm)) {
+            $(this).show('1000');
+            imagesFound = true; 
+          } else {
+            $(this).hide('5000');
+          }
+        });
+
+      $("#closeNotification").click(function() {
+        $("#imageNotFound").removeClass("block").addClass("hidden");
+
+        $(".image").show('1000');
+      });
+
+      if (!imagesFound) {
+        $("#imageNotFound").removeClass("hidden").addClass("block");
+        $("#searchInput").val("");
+        setTimeout(function() {
+          $("#imageNotFound").removeClass("block").addClass("hidden");
+          
+          $(".filter-container button[data-filter='all']").click();
+        }, 4000); 
+      }
+
+      });
+    });
+    </script>
+</body>
+</html>

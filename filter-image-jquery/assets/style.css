@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ddd;
+}
+
+.gallery {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.filter {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter button {
+  background-color: #f2f2f2;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+
+.filter button.active {
+  background-color: #666;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.image {
+  width: 350px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 5px;
+  transform: 0.5s ease;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.image:hover img {
+  transform: scale(1.1);
+}
+
+.image:hover {
+  border-radius: 8px;
+}
